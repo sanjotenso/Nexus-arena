@@ -39,3 +39,4 @@ docker run -p 8888:8888 nexus-arena
 - Replace SQLite with PostgreSQL for scale.
 - Run behind Nginx with SSL.
 - Enable XSRF cookies after updating the frontend to send the token.
+[text](README.md) [text](register.html) [text](team.html) [text](tournament_detail.html) [text](tournaments.html) [text](.vscode) [text](nexus-arena) [text](admin.html) [text](base.html) [text](dashboard.html) [text](index.html) [text](leaderboard.html) [text](login.html) [text](profile.html)

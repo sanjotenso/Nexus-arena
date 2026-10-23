@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ team.get('name','Team') }} - NEXUS ARENA{% end %}
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="page-title">{{ team.get('name','Team') }} <span class="meta">[{{ team.get('tag','') }}]</span></h1>
+        <p class="meta">Captain: {{ team.get('captain_name','Unknown') }}</p>
+        <h2 class="section-title">Roster</h2>
+        <div class="grid grid-4">
+            {% for m in members %}
+            <div class="card card-glass member-card">
+                <div class="avatar">{{ m['username'][0].upper() }}</div>
+                <h4><a href="/profile/{{ m['id'] }}">{{ m['username'] }}</a></h4>
+            </div>
+            {% else %}
+            <p class="empty">No members.</p>
+            {% end %}
+        </div>
+        {% if user %}
+        <button class="btn btn-secondary mt-2" id="btnJoinTeam" data-tid="{{ team.get('id') }}">Join Team</button>
+        {% end %}
+    </div>
+</section>
+{% end %}
