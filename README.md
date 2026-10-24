@@ -11,6 +11,19 @@ A modern gaming tournament platform built with PHP and SQLite.
 - Admin dashboard
 - Search and JSON API endpoints
 
+## MVC Structure
+
+```text
+app/
+  Controllers/   FrontController.php
+  Core/          helpers.php
+  Models/        Database.php
+  Views/         PHP page templates and base layout
+database/        SQLite and MySQL schema files
+nexus-arena/     SQLite database and static assets
+index.php        Web entry point
+```
+
 ## Run locally with XAMPP
 
 1. Link or copy this project into XAMPP's `htdocs` as `Nexus`. For example, the project should be available at `C:\xampp\htdocs\Nexus\index.php`.
@@ -20,7 +33,7 @@ A modern gaming tournament platform built with PHP and SQLite.
 
 The included `.htaccess` routes application pages through PHP. XAMPP Apache must have `mod_rewrite` enabled and permit `.htaccess` overrides for this directory.
 
-The application creates or uses the SQLite database at `nexus-arena/nexus_arena.db` and seeds sample tournaments on first run. The development admin account is `admin` / `admin123`; change or remove it before deployment.
+The application creates or uses the SQLite database at `nexus-arena/nexus_arena.db` and seeds sample tournaments on first run. The SQLite schema is in `database/schema.sql`. The phpMyAdmin MySQL schema is in `database/schema_mysql.sql`; the PHP app currently uses SQLite unless its database model is changed. The development admin account is `admin` / `admin123`; change or remove it before deployment.
 
 ## Run with Docker
 

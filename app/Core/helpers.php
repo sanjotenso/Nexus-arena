@@ -38,7 +38,7 @@ function render_page(string $template, array $data, string $title): void
     global $basePath;
     extract($data, EXTR_SKIP);
     ob_start();
-    require __DIR__ . '/' . $template . '.php';
+    require dirname(__DIR__) . '/Views/' . $template . '.php';
     $content = (string) ob_get_clean();
-    require __DIR__ . '/base.php';
+    require dirname(__DIR__) . '/Views/base.php';
 }
