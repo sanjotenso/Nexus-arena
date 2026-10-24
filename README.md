@@ -1,42 +1,40 @@
 # NEXUS ARENA
 
-A modern, futuristic gaming tournament platform.
+A modern gaming tournament platform built with PHP and SQLite.
 
 ## Features
-- Secure user registration and login
-- Player dashboard with tournaments, teams, and notifications
-- Tournament creation and registration
-- Player profiles and team management
+- User registration and login
+- Player dashboard, profiles, teams, and notifications
+- Tournament creation, browsing, and registration
 - Tournament brackets and match schedules
 - Leaderboards and rankings
 - Admin dashboard
-- Search, filtering, and notifications
+- Search and JSON API endpoints
 
-## Run Locally
+## Run locally with XAMPP
 
-1. Change to the application folder:
-   cd nexus-arena
+1. Link or copy this project into XAMPP's `htdocs` as `Nexus`. For example, the project should be available at `C:\xampp\htdocs\Nexus\index.php`.
+2. In XAMPP's `php.ini`, make sure `pdo_sqlite` is enabled.
+3. Start Apache in the XAMPP Control Panel.
+4. Open `http://localhost/Nexus/`.
 
-2. Install dependencies:
-   pip install -r requirements.txt
+The included `.htaccess` routes application pages through PHP. XAMPP Apache must have `mod_rewrite` enabled and permit `.htaccess` overrides for this directory.
 
-3. Start the server:
-   python app.py
+The application creates or uses the SQLite database at `nexus-arena/nexus_arena.db` and seeds sample tournaments on first run. The development admin account is `admin` / `admin123`; change or remove it before deployment.
 
-4. Open http://localhost:8888
+## Run with Docker
 
-Default admin:
-- Username: admin
-- Password: admin123
+From the repository root:
 
-## Deploy with Docker
+```sh
+docker build -f nexus-arena/Dockerfile -t nexus-arena .
+docker run --rm -p 8888:80 nexus-arena
+```
 
-docker build -t nexus-arena .
-docker run -p 8888:8888 nexus-arena
+Then open `http://localhost:8888`.
 
 ## Production Notes
-- Change COOKIE_SECRET in the environment.
-- Replace SQLite with PostgreSQL for scale.
-- Run behind Nginx with SSL.
-- Enable XSRF cookies after updating the frontend to send the token.
-[text](README.md) [text](register.html) [text](team.html) [text](tournament_detail.html) [text](tournaments.html) [text](.vscode) [text](nexus-arena) [text](admin.html) [text](base.html) [text](dashboard.html) [text](index.html) [text](leaderboard.html) [text](login.html) [text](profile.html)
+
+- Use HTTPS and configure secure session cookies.
+- Change the seeded admin password before exposing the application.
+- Back up the SQLite database; consider PostgreSQL if you need multi-instance deployment.

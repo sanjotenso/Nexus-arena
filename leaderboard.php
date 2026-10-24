@@ -1,6 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Leaderboard - NEXUS ARENA{% end %}
-{% block content %}
 <section class="section">
     <div class="container">
         <h1 class="page-title">Leaderboard</h1>
@@ -16,20 +13,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for r in rows %}
+                    <?php if ($rows): foreach ($rows as $index => $r): ?>
                     <tr>
-                        <td>{{ r['rank'] or loop.index }}</td>
-                        <td>{{ r['username'] or r['team_name'] or 'Unknown' }}</td>
-                        <td>{{ r['points'] }}</td>
-                        <td>{{ r['wins'] }}</td>
-                        <td>{{ r['losses'] }}</td>
+                        <td><?= e($r['rank'] ?: ($index + 1)) ?></td>
+                        <td><?= e($r['username'] ?: ($r['team_name'] ?: 'Unknown')) ?></td>
+                        <td><?= e($r['points']) ?></td>
+                        <td><?= e($r['wins']) ?></td>
+                        <td><?= e($r['losses']) ?></td>
                     </tr>
-                    {% else %}
+                    <?php endforeach; else: ?>
                     <tr><td colspan="5" class="empty">No data yet.</td></tr>
-                    {% end %}
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </section>
-{% end %}

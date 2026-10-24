@@ -1,5 +1,6 @@
 (function () {
     const toastContainer = document.getElementById('toast-container');
+    const baseUrl = document.body.dataset.baseUrl || '';
 
     function showToast(message, type = 'success') {
         if (!toastContainer) return;
@@ -11,7 +12,7 @@
     }
 
     function api(url, options = {}) {
-        return fetch(url, {
+        return fetch(`${baseUrl}${url}`, {
             headers: { 'Content-Type': 'application/json' },
             ...options,
             body: options.body ? JSON.stringify(options.body) : undefined

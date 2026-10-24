@@ -8,8 +8,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open admin.html",
-            "file": "c:\\Users\\jonas\\OneDrive\\Desktop\\wewe\\Nexus\\admin.html"
+            "name": "Open NEXUS ARENA (XAMPP)",
+            "url": "http://localhost/Nexus/"
         }
     ]
 }

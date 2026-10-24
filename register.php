@@ -1,13 +1,10 @@
-{% extends "base.html" %}
-{% block title %}Register - NEXUS ARENA{% end %}
-{% block content %}
 <section class="section section-center">
     <div class="card card-glass form-card">
         <h2 class="form-title">Create Account</h2>
-        {% if error %}
-        <div class="alert alert-error">{{ error }}</div>
-        {% end %}
-        <form method="post" action="/register" class="form" id="registerForm">
+        <?php if ($error): ?>
+        <div class="alert alert-error"><?= e($error) ?></div>
+        <?php endif; ?>
+        <form method="post" action="<?= e(app_url('/register')) ?>" class="form" id="registerForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required minlength="3" maxlength="30">
@@ -26,7 +23,6 @@
             </div>
             <button type="submit" class="btn btn-primary w-full">Create Account</button>
         </form>
-        <p class="form-footer">Already have an account? <a href="/login">Login</a></p>
+        <p class="form-footer">Already have an account? <a href="<?= e(app_url('/login')) ?>">Login</a></p>
     </div>
 </section>
-{% end %}

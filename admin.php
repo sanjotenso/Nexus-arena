@@ -1,6 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Admin - NEXUS ARENA{% end %}
-{% block content %}
 <section class="section">
     <div class="container">
         <h1 class="page-title">Admin Dashboard</h1>
@@ -15,15 +12,15 @@
                         <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Joined</th></tr>
                     </thead>
                     <tbody>
-                        {% for u in users %}
+                        <?php foreach ($users as $u): ?>
                         <tr>
-                            <td>{{ u['id'] }}</td>
-                            <td>{{ u['username'] }}</td>
-                            <td>{{ u['email'] }}</td>
-                            <td>{{ u['role'] }}</td>
-                            <td>{{ u['created_at'] }}</td>
+                            <td><?= e($u['id']) ?></td>
+                            <td><?= e($u['username']) ?></td>
+                            <td><?= e($u['email']) ?></td>
+                            <td><?= e($u['role']) ?></td>
+                            <td><?= e($u['created_at']) ?></td>
                         </tr>
-                        {% end %}
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -36,15 +33,15 @@
                         <tr><th>ID</th><th>Title</th><th>Game</th><th>Status</th><th>Action</th></tr>
                     </thead>
                     <tbody>
-                        {% for t in tournaments %}
+                        <?php foreach ($tournaments as $t): ?>
                         <tr>
-                            <td>{{ t['id'] }}</td>
-                            <td>{{ t['title'] }}</td>
-                            <td>{{ t['game'] }}</td>
-                            <td>{{ t['status'] }}</td>
-                            <td><button type="button" class="btn btn-sm btn-danger" onclick="deleteTournament({{ t['id'] }})">Delete</button></td>
+                            <td><?= e($t['id']) ?></td>
+                            <td><?= e($t['title']) ?></td>
+                            <td><?= e($t['game']) ?></td>
+                            <td><?= e($t['status']) ?></td>
+                            <td><button type="button" class="btn btn-sm btn-danger" onclick="deleteTournament(<?= e($t['id']) ?>)">Delete</button></td>
                         </tr>
-                        {% end %}
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -84,4 +81,3 @@
         </form>
     </div>
 </div>
-{% end %}

@@ -1,14 +1,11 @@
-{% extends "base.html" %}
-{% block title %}NEXUS ARENA - Home{% end %}
-{% block content %}
 <section class="hero">
     <div class="hero-glow"></div>
     <div class="container hero-inner">
         <h1 class="hero-title">FORGE YOUR LEGEND</h1>
         <p class="hero-subtitle">The ultimate tournament platform for elite competitors. Register, compete, and dominate in next-generation esports events.</p>
         <div class="hero-actions">
-            <a href="/tournaments" class="btn btn-glow btn-large">Explore Tournaments</a>
-            <a href="/register" class="btn btn-outline btn-large">Join Now</a>
+            <a href="<?= e(app_url('/tournaments')) ?>" class="btn btn-glow btn-large">Explore Tournaments</a>
+            <a href="<?= e(app_url('/register')) ?>" class="btn btn-outline btn-large">Join Now</a>
         </div>
     </div>
 </section>
@@ -16,25 +13,25 @@
     <div class="container">
         <h2 class="section-title">Featured Tournaments</h2>
         <div class="grid grid-3">
-            {% for t in tournaments %}
+            <?php foreach ($tournaments as $t): ?>
             <article class="card card-glass tournament-card">
                 <div class="card-header">
-                    <span class="badge badge-{{ t['status'] }}">{{ t['status'].upper() }}</span>
-                    <h3 class="card-title">{{ t['title'] }}</h3>
-                    <p class="card-game">{{ t['game'] }}</p>
+                    <span class="badge badge-<?= e($t['status']) ?>"><?= e(strtoupper($t['status'])) ?></span>
+                    <h3 class="card-title"><?= e($t['title']) ?></h3>
+                    <p class="card-game"><?= e($t['game']) ?></p>
                 </div>
                 <div class="card-body">
-                    <p>{{ t['description'] or 'No description provided.' }}</p>
+                    <p><?= e($t['description'] ?: 'No description provided.') ?></p>
                     <div class="meta">
-                        <span>Max teams: {{ t['max_teams'] }}</span>
-                        <span>Start: {{ t['start_date'] or 'TBA' }}</span>
+                        <span>Max teams: <?= e($t['max_teams']) ?></span>
+                        <span>Start: <?= e($t['start_date'] ?: 'TBA') ?></span>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="/tournaments/{{ t['id'] }}" class="btn btn-primary w-full">View Details</a>
+                    <a href="<?= e(app_url('/tournaments/' . $t['id'])) ?>" class="btn btn-primary w-full">View Details</a>
                 </div>
             </article>
-            {% end %}
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -60,4 +57,3 @@
         </div>
     </div>
 </section>
-{% end %}
