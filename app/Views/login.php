@@ -4,7 +4,7 @@
         <?php if ($error): ?>
         <div class="alert alert-error"><?= e($error) ?></div>
         <?php endif; ?>
-        <form method="post" action="<?= e(app_url('/login')) ?>" class="form" id="loginForm">
+        <form method="post" action="<?= e(app_url('/index.php?route=login')) ?>" class="form" id="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required autocomplete="username">

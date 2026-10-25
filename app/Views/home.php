@@ -1,12 +1,11 @@
 <section class="hero">
-    <div class="hero-glow"></div>
     <div class="container hero-inner">
         <h1 class="hero-title">FORGE YOUR LEGEND</h1>
         <p class="hero-subtitle">
             The ultimate tournament platform for elite competitors. Register, compete, and dominate in next-generation esports events.
         </p>
         <div class="hero-actions">
-            <a href="<?= e(app_url('/tournaments')) ?>" class="btn btn-glow btn-large">Explore Tournaments</a>
+            <a href="<?= e(app_url('/tournaments')) ?>" class="btn btn-primary btn-large">Explore Tournaments</a>
             <a href="<?= e(app_url('/register')) ?>" class="btn btn-outline btn-large">Join Now</a>
         </div>
     </div>
@@ -68,4 +67,3 @@
         </div>
     </div>
 </section>
-

@@ -6,13 +6,10 @@
     <title><?= e($title ?? 'NEXUS ARENA') ?></title>
 
     <?php
-        $cssPath = app_url('/nexus-arena/static/css/style.css');
+        $cssPath = app_url('/assets/static/css/style.css');
     ?>
     <link rel="stylesheet" href="<?= e($cssPath) ?>">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body data-base-url="<?= e($basePath) ?>">
     <nav class="navbar">
@@ -48,7 +45,6 @@
     </footer>
 
     <div id="toast-container"></div>
-    <script src="<?= e(app_url('/nexus-arena/static/js/app.js')) ?>"></script>
+    <script src="<?= e(app_url('/assets/static/js/app.js')) ?>"></script>
 </body>
 </html>
-

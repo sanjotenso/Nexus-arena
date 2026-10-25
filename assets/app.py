@@ -8,7 +8,7 @@ import tornado.web
 from tornado.options import define, options, parse_command_line
 
 define("port", default=8888, help="run on the given port", type=int)
-DB_FILE = "nexus_arena.db"
+DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "nexus_arena.db")
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 

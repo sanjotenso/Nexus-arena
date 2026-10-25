@@ -81,6 +81,10 @@ class FrontController
     } elseif ($path === $basePath) {
         $path = '/';
     }
+    $authRoute = $_GET['route'] ?? '';
+    if ($path === '/index.php' && in_array($authRoute, ['login', 'register'], true)) {
+        $path = '/' . $authRoute;
+    }
     $path = rtrim($path, '/') ?: '/';
     $user = current_user();
     $db = Database::connection();

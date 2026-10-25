@@ -20,7 +20,7 @@ app/
   Models/        Database.php
   Views/         PHP page templates and base layout
 database/        SQLite and MySQL schema files
-nexus-arena/     SQLite database and static assets
+assets/          Python app, SQLite database, Dockerfile, and static files
 index.php        Web entry point
 ```
 
@@ -33,14 +33,14 @@ index.php        Web entry point
 
 The included `.htaccess` routes application pages through PHP. XAMPP Apache must have `mod_rewrite` enabled and permit `.htaccess` overrides for this directory.
 
-The application creates or uses the SQLite database at `nexus-arena/nexus_arena.db` and seeds sample tournaments on first run. The SQLite schema is in `database/schema.sql`. The phpMyAdmin MySQL schema is in `database/schema_mysql.sql`; the PHP app currently uses SQLite unless its database model is changed. The development admin account is `admin` / `admin123`; change or remove it before deployment.
+The application creates or uses the SQLite database at `assets/nexus_arena.db` and seeds sample tournaments on first run. The Python and PHP apps use this same SQLite file. The SQLite schema is in `database/schema.sql`. The phpMyAdmin MySQL schema is in `database/schema_mysql.sql`; the PHP app currently uses SQLite unless its database model is changed. The development admin account is `admin` / `admin123`; change or remove it before deployment.
 
 ## Run with Docker
 
 From the repository root:
 
 ```sh
-docker build -f nexus-arena/Dockerfile -t nexus-arena .
+docker build -f assets/Dockerfile -t nexus-arena .
 docker run --rm -p 8888:80 nexus-arena
 ```
 

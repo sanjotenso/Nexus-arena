@@ -12,7 +12,7 @@ final class Database
         }
 
         $projectRoot = dirname(__DIR__, 2);
-        $databasePath = $projectRoot . '/nexus-arena/nexus_arena.db';
+        $databasePath = $projectRoot . '/assets/nexus_arena.db';
         self::$connection = new PDO('sqlite:' . $databasePath, null, null, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

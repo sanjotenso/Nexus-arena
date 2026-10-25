@@ -4,7 +4,7 @@
         <?php if ($error): ?>
         <div class="alert alert-error"><?= e($error) ?></div>
         <?php endif; ?>
-        <form method="post" action="<?= e(app_url('/register')) ?>" class="form" id="registerForm">
+        <form method="post" action="<?= e(app_url('/index.php?route=register')) ?>" class="form" id="registerForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required minlength="3" maxlength="30">
