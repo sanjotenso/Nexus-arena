@@ -14,12 +14,13 @@
 <body data-base-url="<?= e($basePath) ?>">
     <nav class="navbar">
         <div class="container nav-inner">
-            <a href="<?= e(app_url('/')) ?>" class="logo">NEXUS<span>ARENA</span></a>
+            <a href="<?= e(app_url('/#top')) ?>" class="logo">NEXUS<span>ARENA</span></a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
 
             <div class="nav-links" id="navLinks">
-                <a href="<?= e(app_url('/tournaments')) ?>">Tournaments</a>
-                <a href="<?= e(app_url('/leaderboard')) ?>">Leaderboard</a>
+                <a href="<?= e(app_url('/#tournaments')) ?>">Tournaments</a>
+                <a href="<?= e(app_url('/#leaderboard')) ?>">Leaderboard</a>
+                <a href="<?= e(app_url('/#about')) ?>">About</a>
 
                 <?php if (!empty($user)): ?>
                     <a href="<?= e(app_url('/dashboard')) ?>">Dashboard</a>
@@ -28,9 +29,6 @@
                     <?php endif; ?>
                     <a href="<?= e(app_url('/profile/' . $user['id'])) ?>">Profile</a>
                     <a href="<?= e(app_url('/logout')) ?>" class="btn btn-outline">Logout</a>
-                <?php else: ?>
-                    <a href="<?= e(app_url('/login')) ?>" class="btn btn-outline">Login</a>
-                    <a href="<?= e(app_url('/register')) ?>" class="btn btn-primary">Register</a>
                 <?php endif; ?>
             </div>
         </div>

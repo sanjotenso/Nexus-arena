@@ -27,6 +27,36 @@
     const navLinks = document.getElementById('navLinks');
     if (navToggle && navLinks) {
         navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+    }
+
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authPanels = {
+        login: document.getElementById('auth-login-panel'),
+        register: document.getElementById('auth-register')
+    };
+    function selectAuthTab(name) {
+        authTabs.forEach(tab => {
+            const selected = tab.dataset.authTab === name;
+            tab.classList.toggle('active', selected);
+            tab.setAttribute('aria-selected', String(selected));
+        });
+        Object.entries(authPanels).forEach(([tabName, panel]) => {
+            if (panel) panel.classList.toggle('active', tabName === name);
+        });
+    }
+
+    document.querySelectorAll('[data-auth-tab]').forEach(tab => {
+        tab.addEventListener('click', () => selectAuthTab(tab.dataset.authTab));
+    });
+    if (window.location.hash === '#auth-register') {
+        selectAuthTab('register');
+        document.getElementById('auth')?.scrollIntoView();
+    } else if (window.location.hash === '#auth-login') {
+        selectAuthTab('login');
+        document.getElementById('auth')?.scrollIntoView();
     }
 
     window.openModal = function(id) {

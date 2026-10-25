@@ -71,6 +71,22 @@ function page(string $template, array $data = [], string $title = 'NEXUS ARENA')
 
 class FrontController
 {
+    private function renderLanding(PDO $db, ?array $user, ?string $authError = null, string $authTab = 'login'): void
+    {
+        $tournaments = $db->query('SELECT * FROM tournaments ORDER BY created_at DESC LIMIT 6')->fetchAll();
+        $leaderboard = $db->query(
+            'SELECT l.*, u.username, t.name AS team_name FROM leaderboard l
+             LEFT JOIN users u ON l.user_id = u.id
+             LEFT JOIN teams t ON l.team_id = t.id
+             ORDER BY l.points DESC LIMIT 5'
+        )->fetchAll();
+        page(
+            'home',
+            compact('tournaments', 'leaderboard', 'user', 'authError', 'authTab'),
+            'NEXUS ARENA - Home'
+        );
+    }
+
     public function dispatch(): void
     {
     $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
@@ -90,8 +106,7 @@ class FrontController
     $db = Database::connection();
 
     if ($path === '/' && $method === 'GET') {
-        $tournaments = $db->query('SELECT * FROM tournaments ORDER BY created_at DESC LIMIT 6')->fetchAll();
-        page('home', compact('tournaments', 'user'), 'NEXUS ARENA - Home');
+        $this->renderLanding($db, $user);
         return;
     }
 
@@ -100,8 +115,7 @@ class FrontController
             if ($user !== null) {
                 redirect('/dashboard');
             }
-            page('login', ['error' => null, 'user' => null], 'Login - NEXUS ARENA');
-            return;
+            redirect('/#auth-login');
         }
         if ($method === 'POST') {
             $username = trim((string) ($_POST['username'] ?? ''));
@@ -118,7 +132,7 @@ class FrontController
                 $_SESSION['user_id'] = (int) $account['id'];
                 redirect('/dashboard');
             }
-            page('login', ['error' => 'Invalid username or password.', 'user' => null], 'Login - NEXUS ARENA');
+            $this->renderLanding($db, null, 'Invalid username or password.', 'login');
             return;
         }
         method_not_allowed();
@@ -129,8 +143,7 @@ class FrontController
             if ($user !== null) {
                 redirect('/dashboard');
             }
-            page('register', ['error' => null, 'user' => null], 'Register - NEXUS ARENA');
-            return;
+            redirect('/#auth-register');
         }
         if ($method === 'POST') {
             $username = trim((string) ($_POST['username'] ?? ''));
@@ -138,19 +151,19 @@ class FrontController
             $password = (string) ($_POST['password'] ?? '');
             $confirm = (string) ($_POST['confirm'] ?? '');
             if ($username === '' || $email === '' || $password === '') {
-                page('register', ['error' => 'All fields are required.', 'user' => null], 'Register - NEXUS ARENA');
+                $this->renderLanding($db, null, 'All fields are required.', 'register');
                 return;
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                page('register', ['error' => 'Enter a valid email address.', 'user' => null], 'Register - NEXUS ARENA');
+                $this->renderLanding($db, null, 'Enter a valid email address.', 'register');
                 return;
             }
             if ($password !== $confirm) {
-                page('register', ['error' => 'Passwords do not match.', 'user' => null], 'Register - NEXUS ARENA');
+                $this->renderLanding($db, null, 'Passwords do not match.', 'register');
                 return;
             }
             if (strlen($password) < 6) {
-                page('register', ['error' => 'Password must be at least 6 characters.', 'user' => null], 'Register - NEXUS ARENA');
+                $this->renderLanding($db, null, 'Password must be at least 6 characters.', 'register');
                 return;
             }
             try {
@@ -163,7 +176,7 @@ class FrontController
                 if ($exception->getCode() !== '23000') {
                     throw $exception;
                 }
-                page('register', ['error' => 'Username or email already exists.', 'user' => null], 'Register - NEXUS ARENA');
+                $this->renderLanding($db, null, 'Username or email already exists.', 'register');
             }
             return;
         }

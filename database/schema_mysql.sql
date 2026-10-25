@@ -1,11 +1,11 @@
 -- NEXUS ARENA database schema for MySQL/MariaDB (phpMyAdmin).
 -- In phpMyAdmin, open the Import tab and import this file.
 
-CREATE DATABASE IF NOT EXISTS `database_Nexus`
+CREATE DATABASE IF NOT EXISTS `Nexus_db`
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE `database_Nexus`;
+USE `Nexus_db`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
